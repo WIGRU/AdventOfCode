@@ -11,28 +11,24 @@ for line in lines:
     point = {')': 3, ']': 57, '}': 1197, '>': 25137}
     point2 = {'(': 1, '[': 2, '{': 3, '<': 4}
 
+    repl = ['()', '[]', '{}', '<>']
     for i in line:
-        line = line.replace('()', '')
-        line = line.replace('[]', '')
-        line = line.replace('{}', '')
-        line = line.replace('<>', '')
+        for x in repl:
+            line = line.replace(x, '')
 
     corrupted = False
     for i in range(len(line) - 1):
-        if line[i] in left:
-            if line[i + 1] in right:
-                if line[i] != line[i + 1]:
-                    score += point[line[i + 1]]
-                    corrupted = True
+        if line[i] in left and line[i + 1] in right:
+            score += point[line[i + 1]]
+            corrupted = True
 
     if not corrupted:
         score2 = 0
-        line = line.strip()[::-1]
+        line = line.strip()[::-1] #Reverse
         for i in range(len(line.strip())):
             score2 = (score2 * 5) + point2[line[i]]
 
         scores.append(score2)
-
 
 print(score)
 print(statistics.median(scores))
