@@ -8,7 +8,7 @@ for y in range(len(lines)):
         octopus[(x,y)] = {'value': int(lines[y].strip()[x]), 'flashed': False}
 
 #print(octopus)
-steps = 1000000
+steps = 10000
 flashes = []
 
 def flash(k):
@@ -16,45 +16,13 @@ def flash(k):
         flashes.append(k)
         octopus[k]['flashed'] = True
 
-        if (k[0] - 1, k[1]) in octopus.keys():
-            octopus[(k[0] - 1, k[1])]['value'] += 1
-            if octopus[(k[0] - 1, k[1])]['value'] > 9 and octopus[(k[0] - 1, k[1])]['flashed'] == False:
-                flash((k[0] - 1, k[1]))
+        coordinates = [(k[0] - 1, k[1]), (k[0] - 1, k[1] - 1), (k[0] - 1, k[1] + 1), (k[0], k[1] + 1), (k[0], k[1] - 1), (k[0] + 1, k[1]), (k[0] + 1, k[1] - 1), (k[0] + 1, k[1] + 1)]
 
-        if (k[0] - 1, k[1] - 1) in octopus.keys():
-            octopus[(k[0] - 1, k[1] - 1)]['value'] += 1
-            if octopus[(k[0] - 1, k[1] - 1)]['value'] > 9 and octopus[(k[0] - 1, k[1] - 1)]['flashed'] == False:
-                flash((k[0] - 1, k[1] - 1))
-
-        if (k[0] - 1, k[1] + 1) in octopus.keys():
-            octopus[(k[0] - 1, k[1] + 1)]['value'] += 1
-            if octopus[(k[0] - 1, k[1] + 1)]['value'] > 9 and octopus[(k[0] - 1, k[1] + 1)]['flashed'] == False:
-                flash((k[0] - 1, k[1] + 1))
-
-        if (k[0], k[1] + 1) in octopus.keys():
-            octopus[(k[0], k[1] + 1)]['value'] += 1
-            if octopus[(k[0], k[1] + 1)]['value'] > 9 and octopus[(k[0], k[1] + 1)]['flashed'] == False:
-                flash((k[0], k[1] + 1))
-
-        if (k[0], k[1] - 1) in octopus.keys():
-            octopus[(k[0], k[1] - 1)]['value'] += 1
-            if octopus[(k[0], k[1] - 1)]['value'] > 9 and octopus[(k[0], k[1] - 1)]['flashed'] == False:
-                flash((k[0], k[1] - 1))
-
-        if (k[0] + 1, k[1]) in octopus.keys():
-            octopus[(k[0] + 1, k[1])]['value'] += 1
-            if octopus[(k[0] + 1, k[1])]['value'] > 9 and octopus[(k[0] + 1, k[1])]['flashed'] == False:
-                flash((k[0] + 1, k[1]))
-
-        if (k[0] + 1, k[1] - 1) in octopus.keys():
-            octopus[(k[0] + 1, k[1] - 1)]['value'] += 1
-            if octopus[(k[0] + 1, k[1] - 1)]['value'] > 9 and octopus[(k[0] + 1, k[1] - 1)]['flashed'] == False:
-                flash((k[0] + 1, k[1] - 1))
-
-        if (k[0] + 1, k[1] + 1) in octopus.keys():
-            octopus[(k[0] + 1, k[1] + 1)]['value'] += 1
-            if octopus[(k[0] + 1, k[1] + 1)]['value'] > 9 and octopus[(k[0] + 1, k[1] + 1)]['flashed'] == False:
-                flash((k[0] + 1, k[1] + 1))
+        for c in coordinates:
+            if c in octopus.keys():
+                octopus[c]['value'] += 1
+                if octopus[c]['value'] > 9 and octopus[c]['flashed'] == False:
+                    flash(c)
 
 
 for i in range(steps):
