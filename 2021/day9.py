@@ -8,8 +8,8 @@ for y in range(len(lines)):
 
 
 def get_lowpoints(values):
-
     lowpoints = {}
+
     for coordinate in values.keys(): 
         x, y = coordinate
         lowpoint = True
@@ -38,7 +38,7 @@ def part1():
 def part2():
     basins = []
     lowpoints = get_lowpoints(values)
-
+    
     basin = [] # list with coordinates part of basin
     def s(p): # function to find size of basin
         x, y = p
