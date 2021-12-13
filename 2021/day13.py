@@ -1,4 +1,4 @@
-with open("day13.txt") as file:
+with open("2021/data/day13.txt") as file:
     lines = file.readlines()
   
 coords = set() 
@@ -39,8 +39,8 @@ for ins in instructions:
 for y in range(int(line)):
     for x in range(40):
         if (x,y) in new_coords:
-            print("⬛️", end=" ")
+            print("#", end=" ")
         else:
-            print("  ", end=" ")
+            print(" ", end=" ")
             pass
     print("\n")
